@@ -1,15 +1,14 @@
 let wordReplacements = [];
 
-chrome.runtime.onMessage.addListener(function (request) {
+chrome.runtime.onMessage.addListener(async function (request) {
   if (request.data) {
     wordReplacements = request.data;
+    await saveData(wordReplacements);
   }
-  console.log(wordReplacements);
 });
 
 document.addEventListener("keyup", function (event) {
   const inputField = event.target;
-  console.log("injected script");
   if (
     inputField.isContentEditable ||
     inputField.tagName === "TEXTAREA" ||
@@ -18,7 +17,6 @@ document.addEventListener("keyup", function (event) {
     const text = inputField.value || inputField.innerText;
 
     wordReplacements.forEach(function (item) {
-      console.log(`${item.key} => ${item.value}`);
       const regex = new RegExp(item.key, "gi");
       const newText = text.replace(regex, item.value);
       if (newText !== text) {
@@ -30,4 +28,27 @@ document.addEventListener("keyup", function (event) {
       }
     });
   }
+});
+
+async function saveData(data) {
+  console.log("saving");
+  console.log(data);
+  await chrome.storage.sync.set({ data: JSON.stringify(data) });
+}
+
+function getData() {
+  return new Promise((resolve, reject) => {
+    chrome.storage.sync.get(["data"], (e) => {
+      if (e.data) {
+        resolve(JSON.parse(e.data));
+      } else {
+        resolve([]);
+      }
+    });
+  });
+}
+
+getData().then((e) => {
+  console.log(e);
+  wordReplacements = e;
 });

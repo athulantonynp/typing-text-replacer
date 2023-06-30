@@ -4,7 +4,9 @@ import { sendDataToChrome } from "./services/extension_service";
 
 function App() {
   useEffect(() => {
+    console.log("Extension is loaded");
     document.addEventListener("DOMContentLoaded", function () {
+      console.log("Extension fires DOMContentLoaded");
       sendDataToChrome();
     });
   }, []);

@@ -3,12 +3,12 @@
   "name": "Typing text replacer",
   "version": "1.0",
   "description": "Replace words in real-time as you type",
-  "permissions": ["tabs"],
+  "permissions": ["tabs", "storage"],
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
       "js": ["content.js"],
-      "run_at": "document_end"
+      "run_at": "document_start"
     }
   ],
   "browser_action": {
