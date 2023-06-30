@@ -1,0 +1,18 @@
+{
+  "manifest_version": 2,
+  "name": "Typing text replacer",
+  "version": "1.0",
+  "description": "Replace words in real-time as you type",
+  "permissions": ["tabs"],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_popup": "index.html",
+    "default_title": "Typing text replacer"
+  }
+}

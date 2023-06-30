@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getDataItems, setNewData } from "../services/text_data_service";
 import Button from "./button";
+import { sendDataToChrome } from "../services/extension_service";
 
 const DataTable = () => {
   let [data, setData] = useState([]);
@@ -28,6 +29,7 @@ const DataTable = () => {
   function onSave() {
     setNewData(data);
     setData(getDataItems());
+    sendDataToChrome();
   }
 
   return (
