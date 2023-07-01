@@ -1,8 +1,8 @@
 {
-  "manifest_version": 2,
-  "name": "Typing text replacer",
+  "manifest_version": 3,
+  "name": "TypeMagic:Replace words in real-time as you type",
   "version": "1.0",
-  "description": "Replace words in real-time as you type",
+  "description": "Replace words in real-time as you type with predefined words. Totally free. Works on most of the webpages",
   "permissions": ["tabs", "storage"],
   "content_scripts": [
     {
@@ -11,8 +11,8 @@
       "run_at": "document_start"
     }
   ],
-  "browser_action": {
+  "action": {
     "default_popup": "index.html",
-    "default_title": "Typing text replacer"
+    "default_title": "TypeMagic:Replace words in real-time as you type"
   }
 }

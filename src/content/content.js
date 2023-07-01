@@ -4,10 +4,11 @@ chrome.runtime.onMessage.addListener(async function (request) {
   if (request.data) {
     wordReplacements = request.data;
     await saveData(wordReplacements);
+    setUpListners();
   }
 });
 
-document.addEventListener("keyup", function (event) {
+const typeReplacer = (event) => {
   const inputField = event.target;
   if (
     inputField.isContentEditable ||
@@ -28,11 +29,14 @@ document.addEventListener("keyup", function (event) {
       }
     });
   }
-});
+};
+
+function setUpListners() {
+  document.removeEventListener("keyup", typeReplacer);
+  document.addEventListener("keyup", typeReplacer);
+}
 
 async function saveData(data) {
-  console.log("saving");
-  console.log(data);
   await chrome.storage.sync.set({ data: JSON.stringify(data) });
 }
 
@@ -51,4 +55,5 @@ function getData() {
 getData().then((e) => {
   console.log(e);
   wordReplacements = e;
+  setUpListners();
 });
