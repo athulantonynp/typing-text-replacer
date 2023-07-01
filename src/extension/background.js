@@ -1,9 +1,13 @@
 chrome.runtime.onInstalled.addListener(function () {
-  console.log("installed extension");
   chrome.runtime.onMessage.addListener(async function (request) {
-    console.log("Got in background script");
-    console.log(request);
+    if (request.data) {
+      saveData(request.data);
+    }
   });
 });
+
+function saveData(data) {
+  chrome.storage.local.set({ data: JSON.stringify(data) });
+}
 
 console.log("Background script started");

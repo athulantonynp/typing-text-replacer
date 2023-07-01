@@ -1,9 +1,9 @@
 let wordReplacements = [];
 
 chrome.runtime.onMessage.addListener(async function (request) {
+  console.log(request);
   if (request.data) {
     wordReplacements = request.data;
-    await saveData(wordReplacements);
     setUpListners();
   }
 });
@@ -36,13 +36,9 @@ function setUpListners() {
   document.addEventListener("keyup", typeReplacer);
 }
 
-async function saveData(data) {
-  await chrome.storage.sync.set({ data: JSON.stringify(data) });
-}
-
 function getData() {
   return new Promise((resolve, reject) => {
-    chrome.storage.sync.get(["data"], (e) => {
+    chrome.storage.local.get(["data"], (e) => {
       if (e.data) {
         resolve(JSON.parse(e.data));
       } else {
