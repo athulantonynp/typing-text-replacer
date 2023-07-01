@@ -13,7 +13,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && cp src/manifest.json build/ && cp src/content/content.js build/",
+    "build": "react-scripts build && cp src/manifest.json build/ && cp src/extension/content.js build/ && cp src/extension/background.js build/",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

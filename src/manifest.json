@@ -14,5 +14,9 @@
   "action": {
     "default_popup": "index.html",
     "default_title": "TypeMagic:Replace words in real-time as you type"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
   }
 }
